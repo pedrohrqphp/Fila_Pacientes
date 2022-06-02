@@ -50,16 +50,16 @@ namespace Fila_Pacientes
             }
         }
 
-        public void CadastrarDAO()
+        public void CadastrarDAO(Paciente p)
         {
             String sql = "insert into paciente values (@codigo, @nome, @idade, @cpf, @convenio, @prioridade)";
             MySqlCommand cmd = new MySqlCommand(sql, conexao);
-            cmd.Parameters.AddWithValue("@codigo", codigo);
-            cmd.Parameters.AddWithValue("@nome", nome);
-            cmd.Parameters.AddWithValue("@idade", idade);
-            cmd.Parameters.AddWithValue("@cpf", cpf);
-            cmd.Parameters.AddWithValue("@convenio", convenio);
-            cmd.Parameters.AddWithValue("@prioridade", prioridade);
+            cmd.Parameters.AddWithValue("@codigo", p.codigo);
+            cmd.Parameters.AddWithValue("@nome", p.nome);
+            cmd.Parameters.AddWithValue("@idade", p.idade);
+            cmd.Parameters.AddWithValue("@cpf", p.cpf);
+            cmd.Parameters.AddWithValue("@convenio", p.convenio);
+            cmd.Parameters.AddWithValue("@prioridade", p.prioridade);
 
             if (cmd.ExecuteNonQuery() > 0)
             {
@@ -96,16 +96,16 @@ namespace Fila_Pacientes
             }
         }
 
-        public void Atender()
+        public void Atender(Paciente p)
         {
             Console.WriteLine("Qual o número do paciente que foi atendido?");
             Console.Write("Paciente: ");
-            codigo = int.Parse(Console.ReadLine());
+            p.codigo = int.Parse(Console.ReadLine());
             Console.Clear();
 
             String sql = "delete from paciente where codigo_paciente = @codigo";
             MySqlCommand cmd = new MySqlCommand(sql, conexao);
-            cmd.Parameters.AddWithValue("@codigo", codigo);
+            cmd.Parameters.AddWithValue("@codigo", p.codigo);
             cmd.ExecuteNonQuery();
 
             Console.WriteLine("Paciente atendido com sucesso!");
@@ -113,7 +113,7 @@ namespace Fila_Pacientes
             Console.Clear();
         }
 
-        public void MostrarPacientes()
+        public void MostrarPacientes(Paciente p)
         {
             Console.WriteLine("ATUALIZAR DADOS");
             Console.WriteLine("");
@@ -129,17 +129,17 @@ namespace Fila_Pacientes
             }
 
             Console.Write("\nPaciente: ");
-            codigo = int.Parse(Console.ReadLine());
+            p.codigo = int.Parse(Console.ReadLine());
             Console.Clear();
         }
 
-        public void MostrarDados()
+        public void MostrarDados(Paciente p)
         {
             Console.WriteLine("DADOS DO PACIENTE\n");
 
             String sqlD = "select * from paciente where codigo_paciente = @codigo";
             MySqlCommand cmdD = new MySqlCommand(sqlD, conexao);
-            cmdD.Parameters.AddWithValue("@codigo", codigo);
+            cmdD.Parameters.AddWithValue("@codigo", p.codigo);
             MySqlDataReader rdr = cmdD.ExecuteReader();
 
             while (rdr.Read())
@@ -153,22 +153,22 @@ namespace Fila_Pacientes
 
             Console.WriteLine("\nAlterar dados do paciente?");
             Console.Write("Resposta: ");
-            alterar = int.Parse(Console.ReadLine());
+            p.alterar = int.Parse(Console.ReadLine());
             Console.Clear();
         }
 
-        public void AlterarDados()
+        public void AlterarDados(Paciente p)
         {
-            if (alterar == 1)
+            if (p.alterar == 1)
             {             
                 String sqlA = "update paciente set nome_paciente = @nome, idade_paciente = @idade, cpf_paciente = @cpf, convenio_paciente = @convenio, prioridade_paciente = @prioridade where codigo_paciente = @codigo";
                 MySqlCommand cmdA = new MySqlCommand(sqlA, conexao);
-                cmdA.Parameters.AddWithValue("@codigo", codigo);
-                cmdA.Parameters.AddWithValue("@nome", nome);
-                cmdA.Parameters.AddWithValue("@idade", idade);
-                cmdA.Parameters.AddWithValue("@cpf", cpf);
-                cmdA.Parameters.AddWithValue("@convenio", convenio);
-                cmdA.Parameters.AddWithValue("@prioridade", prioridade);
+                cmdA.Parameters.AddWithValue("@codigo", p.codigo);
+                cmdA.Parameters.AddWithValue("@nome", p.nome);
+                cmdA.Parameters.AddWithValue("@idade", p.idade);
+                cmdA.Parameters.AddWithValue("@cpf", p.cpf);
+                cmdA.Parameters.AddWithValue("@convenio", p.convenio);
+                cmdA.Parameters.AddWithValue("@prioridade", p.prioridade);
                 cmdA.ExecuteNonQuery();
 
                 Console.WriteLine("Dados do paciente atualizados com sucesso!");

@@ -37,7 +37,7 @@ namespace Fila_Pacientes
                     case 1:
                         dao.FecharAbrir();
                         p.CadastrarPaciente();
-                        dao.CadastrarDAO(p.CadastrarPaciente());
+                        dao.CadastrarDAO(p);
                         break;
                     case 2:
                         dao.FecharAbrir();
@@ -45,16 +45,16 @@ namespace Fila_Pacientes
                         break;
                     case 3:
                         dao.FecharAbrir();
-                        dao.Atender();
+                        dao.Atender(p);
                         break;
                     case 4:
                         dao.FecharAbrir();
-                        dao.MostrarPacientes();
+                        dao.MostrarPacientes(p);
                         dao.FecharAbrir();
-                        dao.MostrarDados();
+                        dao.MostrarDados(p);
                         dao.FecharAbrir();
                         p.AlterarDados();
-                        dao.AlterarDados(p.AlterarDados());
+                        dao.AlterarDados(p);
                         break;
                     case 0:
                         Environment.Exit(0);
